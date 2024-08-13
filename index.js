@@ -6,7 +6,11 @@ dotenv.config();
 import cors from "cors";
 let app = express();
 const PORT = process.env.PORT;
-app.use(cors());
+app.use(cors({
+    origin: '*', // Allow all origins
+    methods: ['GET', 'POST', 'OPTIONS'], // Specify allowed methods
+    allowedHeaders: ['Content-Type', 'Authorization'], // Specify allowed headers
+}));
 app.use(express.json());
 app.post("/", async (req, res) => {
 
