@@ -7,7 +7,7 @@ import cors from "cors";
 let app = express();
 const PORT = process.env.PORT;
 app.use(cors({
-    origin: '*', // Allow all origins
+    origin: 'https://shivamsprofile.netlify.app', // Allow only this origin
     methods: ['GET', 'POST', 'OPTIONS'], // Specify allowed methods
     allowedHeaders: ['Content-Type', 'Authorization'], // Specify allowed headers
 }));
