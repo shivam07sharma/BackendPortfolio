@@ -5,6 +5,17 @@ import dotenv from 'dotenv';
 dotenv.config();
 let app = express();
 const PORT = process.env.PORT;
+
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', 'https://shivamsprofile.netlify.app');
+    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, OPTIONS, DELETE');
+    if (req.method === 'OPTIONS') {
+        return res.status(200).json({});
+    }
+    next();
+});
 app.use(express.json());
 app.post("/", async (req, res) => {
 
@@ -36,16 +47,4 @@ app.get("/", (req, res) => {
 app.listen(PORT, () => {
     console.log("Server Listening at "+ PORT);
 })
-export default (req, res) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    res.setHeader('Access-Control-Allow-Credentials', true);
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, OPTIONS, DELETE');
 
-    if(req.method === 'OPTIONS') {
-        return res.status(200).json(({
-            body: "OK"
-        }))
-    }
-
-}
